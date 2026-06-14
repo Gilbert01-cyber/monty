@@ -66,4 +66,40 @@ void free_stack(stack_t *stack)
         stack = stack->next;
         free(tmp);
     }
+    /* ... your existing pint function ... */
+void pint(stack_t **stack, unsigned int line_number)
+{
+    /* ... your code ... */
+}
+
+/* ADD THE POP FUNCTION HERE */
+/**
+ * pop - removes the top element of the stack
+ * @stack: pointer to the head of the stack
+ * @line_number: script line number
+ */
+void pop(stack_t **stack, unsigned int line_number)
+{
+    stack_t *tmp;
+
+    if (stack == NULL || *stack == NULL)
+    {
+        fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+    tmp = *stack;
+    *stack = (*stack)->next;
+
+    if (*stack != NULL)
+        (*stack)->prev = NULL;
+
+    free(tmp);
+}
+
+/* ... then your free_stack and other functions ... */
+void free_stack(stack_t *stack)
+{
+    /* ... */
+}
 }
