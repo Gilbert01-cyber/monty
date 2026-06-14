@@ -104,3 +104,26 @@ void op_pop(stack_t **stack, unsigned int line_number)
 
 	free(tmp);
 }
+
+/**
+ * op_swap - swaps the top two elements of the stack
+ * @stack: pointer to the top of the stack
+ * @line_number: current line number in the file
+ */
+void op_swap(stack_t **stack, unsigned int line_number)
+{
+	int tmp;
+
+	if (!*stack || !(*stack)->next)
+	{
+		fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+		free(g_line);
+		fclose(g_file);
+		free_stack(*stack);
+		exit(EXIT_FAILURE);
+	}
+
+	tmp = (*stack)->n;
+	(*stack)->n = (*stack)->next->n;
+	(*stack)->next->n = tmp;
+}
