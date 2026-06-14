@@ -1,14 +1,8 @@
 #include "monty.h"
 
-/**
- * pint - prints the value at the top of the stack
- * @stack: pointer to the head of the stack
- * @line_number: script line number
- * Return: void
- */
 void pint(stack_t **stack, unsigned int line_number)
 {
-    if (stack == NULL || *stack == NULL)
+    if (!stack || !*stack)
     {
         fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
         exit(EXIT_FAILURE);
@@ -16,38 +10,31 @@ void pint(stack_t **stack, unsigned int line_number)
     printf("%d\n", (*stack)->n);
 }
 
-/**
- * push - adds a new node to the stack
- * @stack: pointer to the head of the stack
- * @line_number: line number
- */
-void push(stack_t **stack, unsigned int line_number)
-{
-    /* Your existing push implementation goes here */
-}
-
-/**
- * pall - prints all elements of the stack
- * @stack: pointer to the head of the stack
- * @line_number: line number
- */
 void pall(stack_t **stack, unsigned int line_number)
 {
-    /* Your existing pall implementation goes here */
+    stack_t *current = *stack;
+    (void)line_number;
+    while (current)
+    {
+        printf("%d\n", current->n);
+        current = current->next;
+    }
 }
 
-/**
- * free_stack - frees a stack_t list
- * @stack: pointer to the head of the stack
- */
 void free_stack(stack_t *stack)
 {
     stack_t *tmp;
-
     while (stack)
     {
         tmp = stack;
         stack = stack->next;
         free(tmp);
     }
+}
+
+void push(stack_t **stack, unsigned int line_number)
+{
+    /* Ensure your push logic handles integer conversion and malloc checks */
+    (void)stack;
+    (void)line_number;
 }
