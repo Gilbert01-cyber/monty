@@ -37,6 +37,10 @@ typedef struct instruction_s
 extern FILE *g_file;
 extern char *g_line;
 
+/* main.c */
+void free_stack(stack_t *stack);
+char *get_line(char **line_buf, FILE *file);
+
 /* opcodes.c */
 void op_push(stack_t **stack, unsigned int line_number);
 void op_pall(stack_t **stack, unsigned int line_number);
@@ -45,8 +49,5 @@ void op_swap(stack_t **stack, unsigned int line_number);
 void op_pint(stack_t **stack, unsigned int line_number);
 void op_add(stack_t **stack, unsigned int line_number);
 void op_nop(stack_t **stack, unsigned int line_number);
-
-/* main.c */
-void free_stack(stack_t *stack);
 
 #endif /* MONTY_H */
