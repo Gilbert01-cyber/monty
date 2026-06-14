@@ -54,10 +54,30 @@ void op_push(stack_t **stack, unsigned int line_number)
 	new_node->prev = NULL;
 	new_node->next = *stack;
 
-	if (*stack)
-		(*stack)->prev = new_node;
+	if (g_mode == 0)
+	{
+		if (*stack)
+			(*stack)->prev = new_node;
+		*stack = new_node;
+	}
+	else
+	{
+		if (!*stack)
+		{
+			new_node->next = NULL;
+			*stack = new_node;
+		}
+		else
+		{
+			stack_t *tmp = *stack;
 
-	*stack = new_node;
+			while (tmp->next)
+				tmp = tmp->next;
+			tmp->next = new_node;
+			new_node->prev = tmp;
+			new_node->next = NULL;
+		}
+	}
 }
 
 /**
@@ -390,4 +410,28 @@ void op_rotr(stack_t **stack, unsigned int line_number)
 	tmp->next = *stack;
 	(*stack)->prev = tmp;
 	*stack = tmp;
+}
+
+/**
+ * op_stack - sets the format of the data to a stack (LIFO)
+ * @stack: pointer to the top of the stack
+ * @line_number: current line number in the file
+ */
+void op_stack(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+	g_mode = 0;
+}
+
+/**
+ * op_queue - sets the format of the data to a queue (FIFO)
+ * @stack: pointer to the top of the stack
+ * @line_number: current line number in the file
+ */
+void op_queue(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+	g_mode = 1;
 }
