@@ -12,11 +12,11 @@ void pop(stack_t **stack, unsigned int line_number)
     if (*stack != NULL)
         (*stack)->prev = NULL;
     free(tmp);
-} /* Only one closing brace here */
+} 
 
-/* There should be no other } before the next function starts */
+
 
 void free_stack(stack_t *stack)
 {
-    /* ... */
+    
 }
