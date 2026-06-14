@@ -1,7 +1,6 @@
-
 #include "monty.h"
 
-/* Global variable to hold the integer value for push */
+/* Global variable */
 int global_val = 0;
 
 void push(stack_t **stack, unsigned int line_number)
@@ -9,8 +8,7 @@ void push(stack_t **stack, unsigned int line_number)
     stack_t *new_node;
     char *arg = strtok(NULL, " \n\t");
 
-    /* Validate that an integer was provided */
-    if (!arg || atoi(arg) == 0 && strcmp(arg, "0") != 0)
+    if (!arg || (atoi(arg) == 0 && strcmp(arg, "0") != 0))
     {
         fprintf(stderr, "L%u: usage: push integer\n", line_number);
         exit(EXIT_FAILURE);
@@ -42,5 +40,17 @@ void pall(stack_t **stack, unsigned int line_number)
     {
         printf("%d\n", temp->n);
         temp = temp->next;
+    }
+}
+
+void free_stack(stack_t *stack)
+{
+    stack_t *temp;
+
+    while (stack)
+    {
+        temp = stack;
+        stack = stack->next;
+        free(temp);
     }
 }
