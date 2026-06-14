@@ -58,6 +58,7 @@ int main(int argc, char *argv[])
 		{"sub", op_sub},
 		{"mul", op_mul},
 		{"mod", op_mod},
+		{"pchar", op_pchar},
 		{NULL, NULL}
 	};
 	int i;
