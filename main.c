@@ -25,6 +25,7 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
+	}
 	while (getline(&line, &len, file) != -1)
 	{
 		line_number++;
