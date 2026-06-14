@@ -366,3 +366,28 @@ void op_rotl(stack_t **stack, unsigned int line_number)
 	(*stack)->prev = NULL;
 	tmp->next->next = NULL;
 }
+
+/**
+ * op_rotr - rotates the stack to the bottom
+ * @stack: pointer to the top of the stack
+ * @line_number: current line number in the file
+ */
+void op_rotr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp;
+
+	(void)line_number;
+
+	if (!*stack || !(*stack)->next)
+		return;
+
+	tmp = *stack;
+	while (tmp->next)
+		tmp = tmp->next;
+
+	tmp->prev->next = NULL;
+	tmp->prev = NULL;
+	tmp->next = *stack;
+	(*stack)->prev = tmp;
+	*stack = tmp;
+}
