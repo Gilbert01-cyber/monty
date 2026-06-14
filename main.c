@@ -57,6 +57,7 @@ int main(int argc, char *argv[])
 		{"div", op_div},
 		{"sub", op_sub},
 		{"mul", op_mul},
+		{"mod", op_mod},
 		{NULL, NULL}
 	};
 	int i;
