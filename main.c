@@ -55,6 +55,7 @@ int main(int argc, char *argv[])
 		{"add", op_add},
 		{"nop", op_nop},
 		{"div", op_div},
+		{"sub", op_sub},
 		{NULL, NULL}
 	};
 	int i;
