@@ -1,52 +1,16 @@
 #include "monty.h"
 
-/**
- * is_number - checks if a string is a number
- * @str: string to check
- * Return: 1 if number, 0 otherwise
- */
 int is_number(char *str)
 {
     if (!str) return (0);
     if (*str == '-') str++;
+    if (*str == '\0') return (0);
     while (*str)
     {
         if (*str < '0' || *str > '9') return (0);
         str++;
     }
     return (1);
-}
-
-void pint(stack_t **stack, unsigned int line_number)
-{
-    if (!stack || !*stack)
-    {
-        fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
-        exit(EXIT_FAILURE);
-    }
-    printf("%d\n", (*stack)->n);
-}
-
-void pall(stack_t **stack, unsigned int line_number)
-{
-    stack_t *current = *stack;
-    (void)line_number;
-    while (current)
-    {
-        printf("%d\n", current->n);
-        current = current->next;
-    }
-}
-
-void free_stack(stack_t *stack)
-{
-    stack_t *tmp;
-    while (stack)
-    {
-        tmp = stack;
-        stack = stack->next;
-        free(tmp);
-    }
 }
 
 void push(stack_t **stack, unsigned int line_number, char *arg)
@@ -70,4 +34,36 @@ void push(stack_t **stack, unsigned int line_number, char *arg)
     if (*stack)
         (*stack)->prev = new_node;
     *stack = new_node;
+}
+
+void pall(stack_t **stack, unsigned int line_number)
+{
+    stack_t *current = *stack;
+    (void)line_number;
+    while (current)
+    {
+        printf("%d\n", current->n);
+        current = current->next;
+    }
+}
+
+void pint(stack_t **stack, unsigned int line_number)
+{
+    if (!stack || !*stack)
+    {
+        fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+    printf("%d\n", (*stack)->n);
+}
+
+void free_stack(stack_t *stack)
+{
+    stack_t *tmp;
+    while (stack)
+    {
+        tmp = stack;
+        stack = stack->next;
+        free(tmp);
+    }
 }
