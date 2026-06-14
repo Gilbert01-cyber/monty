@@ -1,32 +1,46 @@
+
 #include "monty.h"
 
-/**
- * push - pushes an element to the stack
- * @stack: double pointer to the head of the stack
- * @line_number: script line number
- */
+/* Global variable to hold the integer value for push */
+int global_val = 0;
+
 void push(stack_t **stack, unsigned int line_number)
 {
-    /* 1. Logic: Parse the integer argument (often handled in main) */
-    /* 2. Allocate memory for a new node */
-    /* 3. Set the value, link the new node to the top, and update the head */
-    (void)stack;
-    (void)line_number;
+    stack_t *new_node;
+    char *arg = strtok(NULL, " \n\t");
+
+    /* Validate that an integer was provided */
+    if (!arg || atoi(arg) == 0 && strcmp(arg, "0") != 0)
+    {
+        fprintf(stderr, "L%u: usage: push integer\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+    new_node = malloc(sizeof(stack_t));
+    if (!new_node)
+    {
+        fprintf(stderr, "Error: malloc failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    new_node->n = atoi(arg);
+    new_node->prev = NULL;
+    new_node->next = *stack;
+
+    if (*stack)
+        (*stack)->prev = new_node;
+    
+    *stack = new_node;
 }
 
-/**
- * pall - prints all values on the stack
- * @stack: double pointer to the head of the stack
- * @line_number: script line number
- */
 void pall(stack_t **stack, unsigned int line_number)
 {
-    stack_t *current = *stack;
+    stack_t *temp = *stack;
     (void)line_number;
 
-    while (current != NULL)
+    while (temp)
     {
-        printf("%d\n", current->n);
-        current = current->next;
+        printf("%d\n", temp->n);
+        temp = temp->next;
     }
 }
