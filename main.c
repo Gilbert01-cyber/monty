@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     if (strcmp(opcode, "push") == 0)
 {
     char *arg = strtok(NULL, " \n\t");
-    push(&stack, line_number, arg); /* Pass arg here */
+    push(&stack, line_number, arg);
 }
     else if (strcmp(opcode, "pall") == 0)
         pall(&stack, line_number);
