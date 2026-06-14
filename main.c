@@ -1,4 +1,9 @@
-/* ... inside your while(getline...) loop ... */
+while (getline(&line, &len, file) != -1)
+{
+    line_number++;
+    opcode = strtok(line, " \n\t");
+    if (!opcode || opcode[0] == '#') continue;
+
     if (strcmp(opcode, "push") == 0)
     {
         char *arg = strtok(NULL, " \n\t");
@@ -15,3 +20,8 @@
         fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
         exit(EXIT_FAILURE);
     }
+} /* <--- MAKE SURE THIS BRACE IS HERE */
+free(line);
+free_stack(stack);
+fclose(file);
+return (0);
