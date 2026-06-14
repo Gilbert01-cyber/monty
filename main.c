@@ -27,7 +27,7 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
-	wwhile (getline(&line, &len, file) != -1)
+	while (getline(&line, &len, file) != -1)
 {
     line_number++;
     opcode = strtok(line, " \n\t");
