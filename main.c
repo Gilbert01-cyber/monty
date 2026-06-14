@@ -1,91 +1,52 @@
-#define _GNU_SOURCE
-#include "monty.h"
+#ifndef MONTY_H
+#define MONTY_H
 
-FILE *g_file = NULL;
-char *g_line = NULL;
-
-/**
- * free_stack - frees a stack
- * @stack: pointer to the stack
- */
-void free_stack(stack_t *stack)
-{
-	stack_t *tmp;
-
-	while (stack)
-	{
-		tmp = stack->next;
-		free(stack);
-		stack = tmp;
-	}
-}
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /**
- * main - entry point for the monty interpreter
- * @argc: argument count
- * @argv: argument vector
- * Return: EXIT_SUCCESS or EXIT_FAILURE
+ * struct stack_s - doubly linked list representation of a stack (or queue)
+ * @n: integer
+ * @prev: points to the previous element of the stack (or queue)
+ * @next: points to the next element of the stack (or queue)
+ *
+ * Description: doubly linked list node structure
  */
-int main(int argc, char *argv[])
+typedef struct stack_s
 {
-	stack_t *stack = NULL;
-	unsigned int line_number = 0;
-	size_t len = 0;
+	int n;
+	struct stack_s *prev;
+	struct stack_s *next;
+} stack_t;
+
+/**
+ * struct instruction_s - opcode and its function
+ * @opcode: the opcode
+ * @f: function to handle the opcode
+ *
+ * Description: opcode and its function
+ */
+typedef struct instruction_s
+{
 	char *opcode;
-	instruction_t instructions[] = {
-		{"push", op_push},
-		{"pall", op_pall},
-		{"pop", op_pop},
-		{"swap", op_swap},
-		{"pint", op_pint},
-		{"add", op_add},
-		{NULL, NULL}
-	};
-	int i;
+	void (*f)(stack_t **stack, unsigned int line_number);
+} instruction_t;
 
-	if (argc != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
+/* Global variables */
+extern FILE *g_file;
+extern char *g_line;
 
-	g_file = fopen(argv[1], "r");
-	if (!g_file)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
+/* opcodes.c */
+void op_push(stack_t **stack, unsigned int line_number);
+void op_pall(stack_t **stack, unsigned int line_number);
+void op_pop(stack_t **stack, unsigned int line_number);
+void op_swap(stack_t **stack, unsigned int line_number);
+void op_pint(stack_t **stack, unsigned int line_number);
+void op_add(stack_t **stack, unsigned int line_number);
+void op_nop(stack_t **stack, unsigned int line_number);
 
-	while (getline(&g_line, &len, g_file) != -1)
-	{
-		line_number++;
-		opcode = strtok(g_line, " \t\n\r");
+/* main.c */
+void free_stack(stack_t *stack);
 
-		if (!opcode || opcode[0] == '#')
-			continue;
-
-		for (i = 0; instructions[i].opcode; i++)
-		{
-			if (strcmp(opcode, instructions[i].opcode) == 0)
-			{
-				instructions[i].f(&stack, line_number);
-				break;
-			}
-		}
-
-		if (!instructions[i].opcode)
-		{
-			fprintf(stderr, "L%u: unknown instruction %s\n",
-				line_number, opcode);
-			free(g_line);
-			fclose(g_file);
-			free_stack(stack);
-			exit(EXIT_FAILURE);
-		}
-	}
-
-	free(g_line);
-	fclose(g_file);
-	free_stack(stack);
-	return (EXIT_SUCCESS);
-}
+#endif /* MONTY_H */
