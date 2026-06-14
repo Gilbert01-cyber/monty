@@ -182,3 +182,35 @@ void op_nop(stack_t **stack, unsigned int line_number)
 	(void)stack;
 	(void)line_number;
 }
+
+/**
+ * op_div - divides the second top element by the top element of the stack
+ * @stack: pointer to the top of the stack
+ * @line_number: current line number in the file
+ */
+void op_div(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp;
+
+	if (!*stack || !(*stack)->next)
+	{
+		fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
+		fclose(g_file);
+		free_stack(*stack);
+		exit(EXIT_FAILURE);
+	}
+
+	if ((*stack)->n == 0)
+	{
+		fprintf(stderr, "L%u: division by zero\n", line_number);
+		fclose(g_file);
+		free_stack(*stack);
+		exit(EXIT_FAILURE);
+	}
+
+	(*stack)->next->n /= (*stack)->n;
+	tmp = *stack;
+	*stack = (*stack)->next;
+	(*stack)->prev = NULL;
+	free(tmp);
+}
