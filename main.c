@@ -4,16 +4,15 @@
  * main - entry point for the Monty interpreter
  * @argc: argument count
  * @argv: argument vector
- * Return: 0 on success, EXIT_FAILURE on error
+ * Return: 0 on success
  */
 int main(int argc, char *argv[])
 {
 	FILE *file;
-	char *line = NULL;
+	char *line = NULL, *opcode;
 	size_t len = 0;
 	unsigned int line_number = 0;
 	stack_t *stack = NULL;
-	char *opcode;
 
 	if (argc != 2)
 	{
@@ -38,8 +37,7 @@ int main(int argc, char *argv[])
 			pall(&stack, line_number);
 		else
 		{
-			fprintf(stderr, "L%u: unknown instruction %s\n",
-				line_number, opcode);
+			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
 			exit(EXIT_FAILURE);
 		}
 	}
