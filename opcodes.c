@@ -321,3 +321,23 @@ void op_pchar(stack_t **stack, unsigned int line_number)
 
 	printf("%c\n", (*stack)->n);
 }
+
+/**
+ * op_pstr - prints the string starting at the top of the stack
+ * @stack: pointer to the top of the stack
+ * @line_number: current line number in the file
+ */
+void op_pstr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *tmp;
+
+	(void)line_number;
+	tmp = *stack;
+
+	while (tmp && tmp->n != 0 && tmp->n >= 0 && tmp->n <= 127)
+	{
+		printf("%c", tmp->n);
+		tmp = tmp->next;
+	}
+	printf("\n");
+}
