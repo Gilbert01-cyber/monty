@@ -37,11 +37,10 @@ int main(int argc, char *argv[])
 
     /* Handle push specifically to capture the argument */
     if (strcmp(opcode, "push") == 0)
-    {
-        char *arg = strtok(NULL, " \n\t");
-        /* Add logic to validate arg is an integer */
-        push(&stack, line_number); 
-    }
+{
+    char *arg = strtok(NULL, " \n\t");
+    push(&stack, line_number, arg); /* Pass arg here */
+}
     else if (strcmp(opcode, "pall") == 0)
         pall(&stack, line_number);
     else if (strcmp(opcode, "pint") == 0)
