@@ -42,6 +42,7 @@ int main(int argc, char *argv[])
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
 			exit(EXIT_FAILURE);
 		}
+		}
 	}
 	free(line);
 	free_stack(stack);
