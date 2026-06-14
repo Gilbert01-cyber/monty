@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
 		{"push", op_push},
 		{"pall", op_pall},
 		{"pop", op_pop},
+		{"swap", op_swap},
 		{NULL, NULL}
 	};
 	int i;
