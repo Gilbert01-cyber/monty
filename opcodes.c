@@ -171,3 +171,14 @@ void op_add(stack_t **stack, unsigned int line_number)
 	(*stack)->prev = NULL;
 	free(tmp);
 }
+
+/**
+ * op_nop - doesn't do anything
+ * @stack: pointer to the top of the stack
+ * @line_number: current line number in the file
+ */
+void op_nop(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
+}
