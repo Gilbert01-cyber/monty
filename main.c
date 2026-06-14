@@ -20,7 +20,7 @@ while (getline(&line, &len, file) != -1)
         fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
         exit(EXIT_FAILURE);
     }
-} /* <--- MAKE SURE THIS BRACE IS HERE */
+} 
 free(line);
 free_stack(stack);
 fclose(file);
