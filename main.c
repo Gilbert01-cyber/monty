@@ -38,6 +38,7 @@ int main(int argc, char *argv[])
 		{"pop", op_pop},
 		{"swap", op_swap},
 		{"pint", op_pint},
+		{"add", op_add},
 		{NULL, NULL}
 	};
 	int i;
