@@ -1,10 +1,10 @@
 #include "monty.h"
 
 /**
- * main - entry point for the Monty interpreter
+ * main - entry point
  * @argc: argument count
  * @argv: argument vector
- * Return: 0 on success
+ * Return: 0
  */
 int main(int argc, char *argv[])
 {
@@ -34,22 +34,12 @@ int main(int argc, char *argv[])
 		if (strcmp(opcode, "push") == 0)
 			push(&stack, line_number);
 		else if (strcmp(opcode, "pall") == 0)
-        {
-            pall(&stack, line_number);
-        }
-        else if (strcmp(opcode, "pint") == 0)
-        {
-            pint(&stack, line_number);
-        }
+			pall(&stack, line_number);
 		else if (strcmp(opcode, "pint") == 0)
-		{
 			pint(&stack, line_number);
-		}
 		else
 		{
 			fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
-			exit(EXIT_FAILURE);
-		}
 			exit(EXIT_FAILURE);
 		}
 	}
