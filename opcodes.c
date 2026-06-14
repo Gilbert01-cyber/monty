@@ -38,12 +38,12 @@ void push(stack_t **stack, unsigned int line_number, char *arg)
 
 void pall(stack_t **stack, unsigned int line_number)
 {
-    stack_t *current = *stack;
+    stack_t *curr = *stack;
     (void)line_number;
-    while (current)
+    while (curr)
     {
-        printf("%d\n", current->n);
-        current = current->next;
+        printf("%d\n", curr->n);
+        curr = curr->next;
     }
 }
 
@@ -57,27 +57,6 @@ void pint(stack_t **stack, unsigned int line_number)
     printf("%d\n", (*stack)->n);
 }
 
-void free_stack(stack_t *stack)
-{
-    stack_t *tmp;
-    while (stack)
-    {
-        tmp = stack;
-        stack = stack->next;
-        free(tmp);
-    }
-    /* ... your existing pint function ... */
-void pint(stack_t **stack, unsigned int line_number)
-{
-    /* ... your code ... */
-}
-
-/* ADD THE POP FUNCTION HERE */
-/**
- * pop - removes the top element of the stack
- * @stack: pointer to the head of the stack
- * @line_number: script line number
- */
 void pop(stack_t **stack, unsigned int line_number)
 {
     stack_t *tmp;
@@ -87,19 +66,20 @@ void pop(stack_t **stack, unsigned int line_number)
         fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
         exit(EXIT_FAILURE);
     }
-
     tmp = *stack;
     *stack = (*stack)->next;
-
     if (*stack != NULL)
         (*stack)->prev = NULL;
-
     free(tmp);
 }
 
-/* ... then your free_stack and other functions ... */
 void free_stack(stack_t *stack)
 {
-    /* ... */
-}
+    stack_t *tmp;
+    while (stack)
+    {
+        tmp = stack;
+        stack = stack->next;
+        free(tmp);
+    }
 }
