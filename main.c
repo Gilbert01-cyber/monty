@@ -2,6 +2,7 @@
 
 FILE *g_file = NULL;
 char *g_line = NULL;
+int g_mode = 0;
 
 /**
  * free_stack - frees a stack
@@ -62,6 +63,8 @@ int main(int argc, char *argv[])
 		{"pstr", op_pstr},
 		{"rotl", op_rotl},
 		{"rotr", op_rotr},
+		{"stack", op_stack},
+		{"queue", op_queue},
 		{NULL, NULL}
 	};
 	int i;
