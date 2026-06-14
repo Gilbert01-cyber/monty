@@ -61,6 +61,7 @@ int main(int argc, char *argv[])
 		{"pchar", op_pchar},
 		{"pstr", op_pstr},
 		{"rotl", op_rotl},
+		{"rotr", op_rotr},
 		{NULL, NULL}
 	};
 	int i;
