@@ -23,3 +23,4 @@ void pall(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t *stack);
 
 #endif
+void pint(stack_t **stack, unsigned int line_number);
