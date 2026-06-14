@@ -36,6 +36,7 @@ typedef struct instruction_s
 /* Global variables */
 extern FILE *g_file;
 extern char *g_line;
+extern int g_mode; /* 0 = stack (LIFO), 1 = queue (FIFO) */
 
 /* main.c */
 void free_stack(stack_t *stack);
@@ -57,5 +58,7 @@ void op_pchar(stack_t **stack, unsigned int line_number);
 void op_pstr(stack_t **stack, unsigned int line_number);
 void op_rotl(stack_t **stack, unsigned int line_number);
 void op_rotr(stack_t **stack, unsigned int line_number);
+void op_stack(stack_t **stack, unsigned int line_number);
+void op_queue(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */
